@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wickedx2</title>
+<meta name="description" content="Wickedx2: videos, merch and everything on the channel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Bangers&family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a manga page split down one vertical axis; every panel is mirrored across it. */
+  :root{
+    --paper:#fbfbf7; --ink:#0b0b0b; --tone:#d9d9d4; --mid:#6b6b66; --white:#ffffff; --gold:#c9a24a;
+    --f-display:'Creepster','Bangers',Impact,fantasy;
+    --f-sfx:'Bangers','Impact',sans-serif;
+    --f-label:'Cinzel','Trajan Pro',Georgia,serif;
+    --f-body:'Inter',system-ui,-apple-system,sans-serif;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--f-body);line-height:1.6;overflow-x:hidden;min-height:100vh}
+  body::before{ /* mirrored halftone corners like screentone on a manga page */
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(circle,rgba(11,11,11,.16) 1.2px,transparent 1.7px) 0 0/9px 9px;
+    -webkit-mask:radial-gradient(ellipse at 0% 0%,#000,transparent 38%),radial-gradient(ellipse at 100% 0%,#000,transparent 38%),radial-gradient(ellipse at 0% 100%,#000,transparent 38%),radial-gradient(ellipse at 100% 100%,#000,transparent 38%);
+            mask:radial-gradient(ellipse at 0% 0%,#000,transparent 38%),radial-gradient(ellipse at 100% 0%,#000,transparent 38%),radial-gradient(ellipse at 0% 100%,#000,transparent 38%),radial-gradient(ellipse at 100% 100%,#000,transparent 38%)}
+  main{position:relative;z-index:1}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .label{font-family:var(--f-sfx);letter-spacing:.14em;font-size:18px;color:var(--ink);background:var(--ink);color:var(--white);padding:3px 12px 1px;display:inline-block;transform:skewX(-8deg)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+  [hidden]{display:none!important}
+
+  svg.skull{color:var(--ink)}
+  .glow{animation:glow 3.5s ease-in-out infinite}
+  @keyframes glow{0%,100%{color:var(--ink)}50%{color:#5a4410}}
+
+  /* ---------- header ---------- */
+  header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:4px solid var(--ink)}
+  .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:74px}
+  .bar nav{display:flex;gap:30px}
+  .bar nav.l{justify-content:flex-end;padding-right:30px}
+  .bar nav.r{justify-content:flex-start;padding-left:30px}
+  .bar nav a{font-family:var(--f-sfx);font-size:21px;letter-spacing:.12em;text-decoration:none;color:var(--ink);transition:transform .15s}
+  .bar nav a:hover{transform:translateY(-2px) scale(1.06)}
+  .crest-link{position:relative;display:block;width:180px;height:74px;overflow:hidden;align-self:end}
+  .crest-link .flames{position:absolute;left:0;bottom:0;width:100%;height:100%;overflow:visible}
+  .flames path{fill:var(--ink);transform-box:fill-box;transform-origin:50% 100%;animation:flick var(--d,1.2s) ease-in-out var(--del,0s) infinite alternate}
+  .flames path.core{fill:var(--white);animation-duration:calc(var(--d,1.2s) * .8)}
+  @keyframes flick{
+    0%{transform:scale(1,1) skewX(0)}
+    35%{transform:scale(.94,1.16) skewX(var(--sk,3deg))}
+    70%{transform:scale(1.05,.9) skewX(calc(var(--sk,3deg) * -1))}
+    100%{transform:scale(.97,1.08) skewX(0)}}
+  .crest-link .half{position:absolute;left:50%;top:-46px;width:96px;height:96px;margin-left:-48px;color:var(--ink);transition:transform .3s}
+  .crest-link:hover .half{transform:translateY(5px)}
+
+  /* ---------- hero: one big panel with speed lines ---------- */
+  .hero{padding-block:34px 10px}
+  .panel{position:relative;border:4px solid var(--ink);background:var(--white);box-shadow:8px 8px 0 var(--ink)}
+  .hero .panel{text-align:center;padding:96px 20px 34px;overflow:hidden}
+  .speed{position:absolute;inset:0;pointer-events:none;
+    background:repeating-conic-gradient(from 0deg at 50% 30%,var(--ink) 0deg .9deg,transparent .9deg 5deg);
+    -webkit-mask:radial-gradient(ellipse at 50% 30%,transparent 22%,#000 60%);mask:radial-gradient(ellipse at 50% 30%,transparent 22%,#000 60%);opacity:.9;animation:speed 2.4s steps(3) infinite}
+  @keyframes speed{0%{transform:rotate(0)}33%{transform:rotate(.6deg)}66%{transform:rotate(-.6deg)}}
+  .hero .inner{position:relative}
+  .hero .crest{width:150px;height:150px;margin:0 auto 6px;display:block;animation:float 5s ease-in-out infinite;filter:drop-shadow(5px 5px 0 var(--ink))}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .name{position:relative;display:inline-block;font-family:var(--f-display);font-weight:400;font-size:clamp(70px,15vw,180px);line-height:.95;margin:6px 0 10px;white-space:nowrap;
+    color:var(--ink);-webkit-text-stroke:6px var(--white);paint-order:stroke fill;text-shadow:7px 7px 0 var(--tone)}
+  .stripes{position:absolute;top:22%;display:flex;flex-direction:column;gap:9px;width:clamp(30px,5vw,60px)}
+  .stripes span{display:block;height:clamp(6px,.9vw,10px);background:var(--white);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .stripes.left{right:calc(100% + 14px)}
+  .stripes.right{left:calc(100% + 14px);transform-origin:left;transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.9,.2,1)}
+  .balanced .stripes.right{transform:scaleX(1)}
+  .shudder{animation:shudder .45s linear 2}
+  @keyframes shudder{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+  .tagline{display:inline-block;max-width:560px;margin:6px auto 0;font-size:clamp(15px,2vw,18px);font-weight:600;background:var(--white);border:3px solid var(--ink);padding:10px 18px;position:relative}
+  .twin{display:flex;justify-content:center;gap:18px;margin-top:28px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:210px;padding:13px 26px 11px;font-family:var(--f-sfx);font-size:22px;letter-spacing:.12em;text-decoration:none;border:3px solid var(--ink);background:var(--white);color:var(--ink);cursor:pointer;box-shadow:5px 5px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+  .btn.solid{background:var(--ink);color:var(--white)}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+  .btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+  .btn.off{background:var(--tone);color:var(--mid);border-color:var(--mid);box-shadow:4px 4px 0 var(--mid);pointer-events:none}
+  .symmetry{margin-top:26px;display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;font-family:var(--f-sfx);font-size:19px;letter-spacing:.1em;background:var(--white);border:3px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--ink)}
+  .meter{width:150px;height:14px;border:3px solid var(--ink);position:relative;overflow:hidden;background:var(--white)}
+  .meter b{position:absolute;left:0;top:0;bottom:0;width:66.6%;background:repeating-linear-gradient(45deg,var(--ink) 0 3px,transparent 3px 7px);transition:width .8s cubic-bezier(.2,.9,.2,1)}
+  .balanced .meter b{width:100%;background:var(--ink)}
+  .fix{font:inherit;letter-spacing:inherit;background:var(--gold);border:3px solid var(--ink);color:var(--ink);cursor:pointer;padding:2px 12px 0;box-shadow:3px 3px 0 var(--ink)}
+  /* speech bubble */
+  .bubble{position:absolute;font-family:var(--f-sfx);font-size:clamp(17px,2.2vw,24px);letter-spacing:.06em;background:var(--white);border:3px solid var(--ink);border-radius:50%;padding:16px 26px;line-height:1.05;text-align:center;box-shadow:4px 4px 0 var(--ink);transition:transform .3s}
+  .bubble::after{content:"";position:absolute;width:22px;height:22px;background:var(--white);border:solid var(--ink);border-width:0 3px 3px 0;bottom:-11px}
+  .bubble.l{left:3%;top:4%;transform:rotate(-6deg)}
+  .bubble.l::after{right:26%;transform:rotate(45deg) skew(12deg,12deg)}
+  .bubble.r{right:3%;top:4%;transform:rotate(6deg)}
+  .bubble.r::after{left:26%;transform:rotate(45deg) skew(12deg,12deg)}
+
+  /* ---------- sections ---------- */
+  section{padding:80px 0 10px}
+  .sec-head{text-align:center;margin-bottom:40px}
+  .sec-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,8vw,90px);line-height:1;margin:16px 0 10px;color:var(--white);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink)}
+  .sec-head p{color:var(--mid);max-width:560px;margin:0 auto;font-weight:500}
+
+  .frame{position:relative;border:4px solid var(--ink);background:var(--white);box-shadow:6px 6px 0 var(--ink)}
+  .tone{background:radial-gradient(circle,rgba(11,11,11,.22) 1.3px,transparent 1.8px) 0 0/8px 8px,var(--white)}
+
+  .latest{max-width:880px;margin:0 auto}
+  .latest .screen{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+  .latest iframe{width:100%;height:100%;border:0;display:block}
+  .empty{text-align:center;display:grid;justify-items:center;gap:10px;padding:20px;position:relative}
+  .empty svg{width:72px;height:72px;filter:drop-shadow(4px 4px 0 var(--ink))}
+  .empty b{font-family:var(--f-sfx);letter-spacing:.1em;font-size:30px;background:var(--white);border:3px solid var(--ink);padding:4px 14px 0;box-shadow:4px 4px 0 var(--ink)}
+  .empty span{font-weight:700;background:var(--white);padding:0 8px}
+
+  .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+  .vid{display:block;text-align:left;cursor:pointer;font:inherit;color:inherit;padding:0;transition:transform .15s,box-shadow .15s}
+  .vid:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+  .vid .thumb{aspect-ratio:16/9;overflow:hidden;position:relative;border-bottom:4px solid var(--ink);display:grid;place-items:center}
+  .vid img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .vid:hover img{transform:scale(1.05)}
+  .vid .play{position:absolute;inset:0;display:grid;place-items:center}
+  .vid .play span{width:58px;height:58px;border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--white);box-shadow:3px 3px 0 var(--ink)}
+  .vid .play svg{width:20px;height:20px;fill:var(--ink);margin-left:3px}
+  .vid .cap{padding:9px 14px 7px;font-family:var(--f-sfx);font-size:20px;letter-spacing:.12em;text-align:center}
+  .vid.soon{cursor:default}
+  .vid.soon:hover{transform:none;box-shadow:6px 6px 0 var(--ink)}
+  .vid.soon .thumb svg{width:46px;height:46px;filter:drop-shadow(3px 3px 0 var(--ink))}
+  .vid.soon .numeral{position:absolute;bottom:4px;font-family:var(--f-display);font-size:30px;background:var(--white);padding:0 8px;border:2px solid var(--ink)}
+
+  /* shorts layout: tall cards, vertical player */
+  .shorts .vids{grid-template-columns:repeat(4,1fr)}
+  .shorts .vid .thumb{aspect-ratio:9/16}
+  .shorts .vid .cap{font-family:var(--f-body);font-weight:700;font-size:13.5px;letter-spacing:0;line-height:1.35;padding:10px 12px 12px;text-align:center;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(1.35em * 2 + 22px)}
+  .shorts .player .box{width:auto;height:min(86vh,900px);aspect-ratio:9/16;max-width:100%}
+  .merch{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .item{display:flex;flex-direction:column;text-align:center;transition:transform .15s,box-shadow .15s}
+  .item:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+  .item .art{aspect-ratio:1/1;display:grid;place-items:center;border-bottom:4px solid var(--ink)}
+  .item .art svg{width:80%;height:80%}
+  .item .art .cloth{fill:var(--white);stroke:var(--ink);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+  .item .art .detail{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+  .item .art .stripe{fill:var(--ink)}
+  .item .info{padding:14px 14px 18px;display:grid;gap:4px;flex:1}
+  .item h3{font-family:var(--f-sfx);font-weight:400;font-size:22px;letter-spacing:.08em}
+  .item .price{font-family:var(--f-display);font-size:36px;line-height:1}
+  .item .btn{min-width:0;width:100%;margin-top:8px;padding:9px 10px 7px;font-size:19px}
+  .shopall{text-align:center;margin-top:34px}
+  .merch.none{display:block}
+  .soonpanel{position:relative;overflow:hidden;text-align:center;padding:64px 20px;max-width:880px;margin:0 auto}
+  .soonpanel .speed{background:repeating-conic-gradient(from 0deg at 50% 50%,var(--ink) 0deg .9deg,transparent .9deg 5deg);
+    -webkit-mask:radial-gradient(ellipse at 50% 50%,transparent 30%,#000 75%);mask:radial-gradient(ellipse at 50% 50%,transparent 30%,#000 75%)}
+  .soonpanel .inner{position:relative;display:grid;justify-items:center;gap:18px}
+  .soonpanel b{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,76px);line-height:1;color:var(--ink);-webkit-text-stroke:5px var(--white);paint-order:stroke fill;text-shadow:5px 5px 0 var(--tone)}
+
+
+  .about{max-width:700px;margin:0 auto;text-align:center;font-size:18px;line-height:1.75;font-weight:500;padding:28px 30px}
+  .socials{display:flex;justify-content:center;gap:12px 18px;flex-wrap:wrap;margin-top:30px}
+  .socials a{font-family:var(--f-sfx);font-size:20px;letter-spacing:.1em;text-decoration:none;border:3px solid var(--ink);padding:5px 14px 3px;box-shadow:3px 3px 0 var(--ink);background:var(--white)}
+  .socials a:hover{background:var(--ink);color:var(--white)}
+  .mail{margin-top:26px;font-weight:600}
+  .mail code{font-family:var(--f-body);user-select:all;border-bottom:2px solid var(--ink)}
+  .mail button{margin-left:10px;background:var(--white);border:2px solid var(--ink);font:inherit;font-size:13px;padding:3px 10px;cursor:pointer}
+
+  footer{margin-top:90px;padding:34px 0 calc(42px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--white);text-align:center;border-top:4px solid var(--ink)}
+  footer svg{width:40px;height:40px;margin-bottom:10px}
+  footer svg.skull{color:var(--ink)}
+  footer p{font-family:var(--f-sfx);font-size:18px;letter-spacing:.14em}
+  footer a{text-decoration:none;border-bottom:2px solid var(--white)}
+
+  .player{position:fixed;inset:0;z-index:50;background:rgba(11,11,11,.9);display:grid;place-items:center;padding:20px}
+  .player .box{width:min(1000px,100%);aspect-ratio:16/9;border:4px solid var(--white)}
+  .player iframe{width:100%;height:100%;border:0}
+  .player .close{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));background:var(--white);border:3px solid var(--ink);color:var(--ink);font-family:var(--f-sfx);letter-spacing:.1em;font-size:20px;padding:6px 14px 4px;cursor:pointer}
+
+  .from-l,.from-r{transition:transform .9s cubic-bezier(.2,.9,.2,1),opacity .9s}
+  .pre .from-l{transform:translateX(-60px);opacity:.001}
+  .pre .from-r{transform:translateX(60px);opacity:.001}
+
+  .ghost{position:fixed;z-index:30;width:24px;height:24px;margin:-12px 0 0 -12px;pointer-events:none;opacity:0;transition:opacity .3s}
+  .ghost svg{width:100%;height:100%}
+  .ghost.on{opacity:.75}
+  .toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px) rotate(-3deg);opacity:0;z-index:60;background:var(--gold);color:var(--ink);font-family:var(--f-sfx);font-size:28px;letter-spacing:.08em;padding:10px 24px 6px;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transition:.35s cubic-bezier(.2,1.4,.4,1);pointer-events:none;white-space:nowrap}
+  .toast.show{opacity:1;transform:translate(-50%,0) rotate(-3deg)}
+
+  @media (max-width:900px){
+    .merch{grid-template-columns:repeat(2,1fr)}
+    .vids,.shorts .vids{grid-template-columns:repeat(2,1fr)}
+    .bar nav{gap:18px}.bar nav.l{padding-right:18px}.bar nav.r{padding-left:18px}
+    .bubble{display:none}
+  }
+  @media (max-width:600px){
+    .bar{height:62px}
+    .bar nav a{font-size:16px;letter-spacing:.06em}
+    .bar nav{gap:12px}.bar nav.l{padding-right:12px}.bar nav.r{padding-left:12px}
+    .crest-link{width:120px;height:62px}
+    .crest-link .half{width:76px;height:76px;margin-left:-38px;top:-37px}
+    .hero .panel{padding:34px 14px 26px;box-shadow:5px 5px 0 var(--ink)}
+    .hero .crest{width:110px;height:110px}
+    .name{-webkit-text-stroke:4px var(--white);text-shadow:4px 4px 0 var(--tone)}
+    .merch,.vids{gap:14px}
+    .item h3{font-size:17px}.item .price{font-size:28px}
+    .btn{min-width:0;width:100%}
+    .twin{flex-direction:column;align-items:stretch;max-width:320px;margin-left:auto;margin-right:auto}
+    .symmetry{font-size:16px}
+    .meter{width:110px}
+    .ghost{display:none}
+    .toast{white-space:normal;text-align:center;width:calc(100% - 40px)}
+    .stripes.left{right:calc(100% + 6px)}.stripes.right{left:calc(100% + 6px)}
+    .about{padding:20px 18px;font-size:16.5px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .pre .from-l,.pre .from-r{transform:none;opacity:1}
+  }
+</style>
+</head>
+<body class="pre">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="skull" viewBox="-4 -4 108 108">
+    <g stroke="#0b0b0b" stroke-width="4" stroke-linejoin="round" fill="#ffffff">
+      <path d="M33 13Q42 22 39 31Q33 34 28 30Q25 21 33 13Z"/>
+      <path d="M67 13Q58 22 61 31Q67 34 72 30Q75 21 67 13Z"/>
+      <path d="M50 1Q62 15 57 28Q50 33 43 28Q38 15 50 1Z"/>
+      <path d="M50 22C30 22 18 36 18 53c0 10 5 17 12 21l3 14h34l3-14c7-4 12-11 12-21 0-17-12-31-32-31Z"/>
+    </g>
+    <path fill="#0b0b0b" d="M47 9Q53 17 50 25Q46 20 47 9Z"/>
+    <path fill="currentColor" stroke="#0b0b0b" stroke-width="2.5" stroke-linejoin="round" d="M25 49L46 54L32 65Z"/>
+    <path fill="currentColor" stroke="#0b0b0b" stroke-width="2.5" stroke-linejoin="round" d="M75 49L54 54L68 65Z"/>
+    <path fill="#0b0b0b" d="M50 60l4.5 6.5L50 73l-4.5-6.5z"/>
+    <path fill="none" stroke="#0b0b0b" stroke-width="3" stroke-linecap="round" d="M35 80Q50 85 65 80M40 77v7M45 78.5v7M50 79v7M55 78.5v7M60 77v7"/>
+  </symbol>
+  <symbol id="playicon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+</svg>
+
+<main>
+  <header class="top">
+    <div class="wrap bar">
+      <nav class="l" aria-label="Primary left"><a href="#videos">Videos</a><a href="#merch">Merch</a></nav>
+      <a class="crest-link" href="#top" aria-label="Back to top">
+        <svg class="flames" id="flames" viewBox="0 0 180 74" preserveAspectRatio="xMidYMax meet" aria-hidden="true"></svg>
+        <svg class="skull half" aria-hidden="true"><use href="#skull"/></svg>
+      </a>
+      <nav class="r" aria-label="Primary right"><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap hero" id="top">
+    <div class="panel">
+      <div class="speed" aria-hidden="true"></div>
+      <div class="bubble l" id="bubL" aria-hidden="true">Something's<br>off...</div>
+      <div class="bubble r" id="bubR" aria-hidden="true">The stripes!<br>Only one side!</div>
+      <div class="inner">
+        <h1 class="name" id="name"><span class="stripes left" aria-hidden="true"><span></span><span></span><span></span></span><span id="chName">Wickedx2</span><span class="stripes right" aria-hidden="true"><span></span><span></span><span></span></span></h1>
+        <div><p class="tagline" id="tagline"></p></div>
+        <div class="twin">
+          <a class="btn solid from-l" id="subBtn" href="#" target="_blank" rel="noopener">Subscribe</a>
+          <a class="btn from-r" href="#videos">Watch videos</a>
+        </div>
+        <div class="symmetry">
+          <span>Symmetry</span><span class="meter" aria-hidden="true"><b></b></span><span id="symPct">66.6%</span>
+          <button class="fix" id="fix" type="button">Fix it!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="videos">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">On the channel</span>
+        <h2>Latest Upload</h2>
+      </div>
+      <div class="latest frame tone from-l"><div class="screen" id="latest"></div></div>
+      <div class="vids" id="vids"></div>
+    </div>
+  </section>
+
+  <section id="merch">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Official merch</span>
+        <h2>The Armory</h2>
+        <p id="merchNote">Rep the channel. Every piece is made to order and shipped to your door.</p>
+      </div>
+      <div class="merch" id="merchGrid"></div>
+      <div class="shopall" id="shopAll" hidden><a class="btn" id="shopAllBtn" href="#" target="_blank" rel="noopener">Visit the full store</a></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">The channel</span><h2>About</h2></div>
+      <p class="about frame" id="aboutText"></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap" style="text-align:center">
+      <div class="sec-head"><span class="label">Find me</span><h2>Contact</h2><p>Business, collabs or just saying hi.</p></div>
+      <div class="twin">
+        <a class="btn solid from-l" id="ytBtn" href="#" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn from-r" id="dcBtn" href="#" target="_blank" rel="noopener">Discord</a>
+      </div>
+      <p class="mail" id="mail" hidden>Business email: <code id="mailAddr"></code><button type="button" id="copyMail">Copy</button></p>
+      <div class="socials" id="socials"></div>
+    </div>
+  </section>
+
+  <footer>
+    <svg class="skull" aria-hidden="true"><use href="#skull"/></svg>
+    <p>© <span id="yr">2026</span> <span id="footName">Wickedx2</span> · Site by <a href="https://liljrock888-gif.github.io/timid-studio/" target="_blank" rel="noopener">Timid Studio</a></p>
+  </footer>
+</main>
+
+<div class="player" id="player" hidden><button class="close" id="closePlayer" type="button">Close ✕</button><div class="box" id="playerBox"></div></div>
+<div class="ghost" id="ghost" aria-hidden="true"><svg class="skull"><use href="#skull"/></svg></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="content.js"></script>
+<script>
+  const C = (typeof CHANNEL !== 'undefined') ? CHANNEL : {name:'Wickedx2',socials:{}};
+  const V = (typeof VIDEOS !== 'undefined') ? VIDEOS : [];
+  const M = (typeof MERCH !== 'undefined') ? MERCH : [];
+  const $ = id => document.getElementById(id);
+  const skull = '<svg class="skull" aria-hidden="true"><use href="#skull"/></svg>';
+  const ytId = u => { const m = String(u).match(/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([\w-]{11})/); return m ? m[1] : null; };
+  const yt = C.socials && C.socials.youtube || (C.handle ? 'https://www.youtube.com/' + C.handle : '');
+
+  // channel text
+  $('chName').textContent = C.name; $('footName').textContent = C.name; document.title = C.name;
+  $('tagline').textContent = C.tagline || '';
+  $('aboutText').textContent = C.about || '';
+  $('subBtn').href = yt ? yt + '?sub_confirmation=1' : '#';
+  $('ytBtn').href = yt || '#';
+  if (C.discord) $('dcBtn').href = C.discord; else $('dcBtn').hidden = true;
+  if (C.email) { $('mail').hidden = false; $('mailAddr').textContent = C.email; }
+  $('copyMail').onclick = () => { navigator.clipboard?.writeText(C.email).then(() => say('Email copied'), () => {}); };
+  const names = {youtube:'YouTube',tiktok:'TikTok',instagram:'Instagram',twitch:'Twitch',x:'X'};
+  $('socials').innerHTML = Object.entries(C.socials || {}).filter(([,u]) => u).map(([k,u]) => `<a href="${u}" target="_blank" rel="noopener">${names[k] || k}</a>`).join('');
+
+  // latest upload: channel uploads playlist (auto) > newest listed video > empty frame
+  const vids = V.map(v => typeof v === 'string' ? {link:v} : v).map(v => ({...v, id: ytId(v.link)})).filter(v => v.id);
+  const ids = vids.map(v => v.id);
+  const SHORTS = C.layout === 'shorts';
+  if (SHORTS) document.body.classList.add('shorts');
+  const latest = $('latest');
+  if (C.channelId && /^UC[\w-]{22}$/.test(C.channelId)) {
+    latest.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UU${C.channelId.slice(2)}" title="Latest uploads" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  } else if (ids[0]) {
+    latest.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ids[0]}" title="Latest video" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    latest.innerHTML = `<div class="empty">${skull}<b>New video incoming</b><span>Subscribe so you don't miss it.</span></div>`;
+  }
+
+  // archive: listed videos, or six mirrored "coming soon" slots
+  const R = ['I','II','III','IV','V','VI'];
+  $('vids').innerHTML = ids.length
+    ? vids.slice(C.channelId ? 0 : 1).map(({id, title}, i) => `<button class="vid frame ${i % 4 < 2 ? 'from-l' : 'from-r'}" type="button" data-id="${id}">
+        <div class="thumb"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><div class="play"><span><svg><use href="#playicon"/></svg></span></div></div>
+        <div class="cap">${title ? title.replace(/[<>&"]/g, '') : 'Watch'}</div></button>`).join('')
+    : R.map((n, i) => `<div class="vid frame tone soon ${i % 3 === 0 ? 'from-l' : i % 3 === 2 ? 'from-r' : ''}"><div class="thumb">${skull}<span class="numeral">${n}</span></div><div class="cap">Coming soon</div></div>`).join('');
+  $('vids').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) openPlayer(b.dataset.id); });
+  function openPlayer(id){
+    $('playerBox').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" title="Video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    $('player').hidden = false;
+  }
+  function closePlayer(){ $('player').hidden = true; $('playerBox').innerHTML = ''; }
+  $('closePlayer').onclick = closePlayer;
+  $('player').addEventListener('click', e => { if (e.target.id === 'player') closePlayer(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
+
+  // merch drawings
+  const LOOK = {
+    tee: `<path class="cloth" d="M64 42l20-11q16 14 32 0l20 11 34 25-15 28-18-10v86H63V85l-18 10-15-28z"/><path class="detail" d="M84 31q16 18 32 0"/><use href="#skull" x="83" y="78" width="34" height="34"/>`,
+    hoodie: `<path class="cloth" d="M60 56l24-14q16-26 32 0l24 14 32 28-14 70-16-4-2 22H60l-2-22-16 4-14-70z"/><path class="detail" d="M84 42q16 32 32 0M94 58l-2 26M106 58l2 26M72 138h56l5 26H67z"/><use href="#skull" x="85" y="94" width="30" height="30"/>`,
+    beanie: `<path class="cloth" d="M46 128q0-82 54-82t54 82z"/><circle class="cloth" cx="100" cy="40" r="13"/><rect class="cloth" x="40" y="122" width="120" height="38" rx="6"/><rect class="stripe" x="52" y="130" width="22" height="4"/><rect class="stripe" x="52" y="139" width="22" height="4"/><rect class="stripe" x="52" y="148" width="22" height="4"/><use href="#skull" x="88" y="80" width="24" height="24"/>`,
+    stickers: `<rect class="cloth" x="34" y="44" width="78" height="78" rx="16" transform="rotate(-9 73 83)"/><use href="#skull" x="50" y="58" width="46" height="46" transform="rotate(-9 73 83)"/><circle class="cloth" cx="128" cy="124" r="42"/><use href="#skull" x="106" y="102" width="44" height="44"/><rect class="cloth" x="108" y="34" width="56" height="34" rx="17" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="44" width="28" height="3" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="50" width="28" height="3" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="56" width="28" height="3" transform="rotate(8 136 51)"/>`
+  };
+  $('merchGrid').innerHTML = M.map((m, i) => {
+    const link = m.link || C.store || '';
+    return `<div class="item frame ${i < M.length / 2 ? 'from-l' : 'from-r'}">
+      <div class="art tone"><svg viewBox="0 0 200 200" aria-hidden="true">${LOOK[m.look] || LOOK.tee}</svg></div>
+      <div class="info"><h3>${m.name}</h3><div class="price">${m.price}</div>
+        <a class="btn solid ${link ? '' : 'off'}" href="${link || '#'}" target="_blank" rel="noopener">${link ? 'Buy' : 'Dropping soon'}</a></div></div>`;
+  }).join('');
+  if (C.store) { $('shopAll').hidden = false; $('shopAllBtn').href = C.store; }
+  if (!M.length) {
+    $('merchNote').textContent = 'Official merch is on the way. Subscribe so you catch the first drop.';
+    $('merchGrid').classList.add('none');
+    $('merchGrid').innerHTML = `<div class="soonpanel frame tone">
+      <div class="speed" aria-hidden="true"></div>
+      <div class="inner"><span class="label">The Armory</span><b>Merch coming soon</b>
+        <a class="btn solid" href="${yt ? yt + '?sub_confirmation=1' : '#'}" target="_blank" rel="noopener">Subscribe for the drop</a></div></div>`;
+  }
+
+  // black flames splitting the menu: curling tongues, mirrored pairs flicker in sync
+  (function(){
+    const svg = document.getElementById('flames'); if (!svg) return;
+    const H = 74, cx = 90;
+    // a flame tongue whose tip curls toward `dir` (-1 left, 1 right)
+    const tongue = (x, w, h, dir) => {
+      const k = dir * w;
+      return `M${x-w/2} ${H}C${x-w/2} ${H-h*.38} ${x-k*.42} ${H-h*.55} ${x-k*.08} ${H-h*.74}`+
+             `C${x+k*.12} ${H-h*.86} ${x-k*.02} ${H-h*.94} ${x+k*.22} ${H-h}`+
+             `C${x+k*.34} ${H-h*.78} ${x+w*.5} ${H-h*.5} ${x+w/2} ${H}Z`;
+    };
+    // [offset from center, width, height, duration, delay]
+    const pairs = [[66,18,26,1.3,.1],[52,24,44,1.05,.35],[38,22,30,1.4,0],[26,20,40,1.15,.2]];
+    let back = '', front = '';
+    pairs.forEach(([dx,w,h,d,del]) => {           // draw the right side only...
+      const x = cx + dx, st = `--d:${d}s;--del:-${del}s;--sk:4deg`;
+      back += `<path d="${tongue(x, w, h, 1)}" style="${st}"/>`;
+      if (h > 34) front += `<path class="core" d="${tongue(x + 1.5, w*.38, h*.5, -1)}" style="${st}"/>`;
+    });
+    back += `<path d="${tongue(cx + 9, 14, 20, 1)}" style="--d:.9s;--del:-.5s;--sk:3deg"/>`;
+    const half = back + front;                     // ...then mirror it exactly for the left
+    svg.innerHTML = `<g>${half}</g><g transform="translate(${cx*2} 0) scale(-1 1)">${half}</g>`;
+  })();
+
+  // mirrored entrance
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('pre')));
+
+  // symmetry easter egg
+  const hero = document.querySelector('.hero'), nameEl = $('name'), toast = $('toast');
+  function say(t){ toast.textContent = t; toast.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('show'), 2600); }
+  $('fix').addEventListener('click', () => {
+    if (hero.classList.contains('balanced')) return say('ALREADY PERFECT!');
+    nameEl.classList.add('shudder');
+    setTimeout(() => { nameEl.classList.remove('shudder'); hero.classList.add('balanced');
+      $('symPct').textContent = '100%'; $('fix').textContent = 'Perfect!'; $('bubL').innerHTML = 'Perfect<br>symmetry!'; $('bubR').innerHTML = 'Beautiful.<br>Balanced.'; say('PERFECT SYMMETRY!'); }, 900);
+  });
+
+  // mirror cursor
+  const ghost = $('ghost');
+  if (matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    addEventListener('mousemove', e => { ghost.style.left = (innerWidth - e.clientX) + 'px'; ghost.style.top = e.clientY + 'px'; ghost.classList.add('on'); });
+    document.addEventListener('mouseleave', () => ghost.classList.remove('on'));
+  }
+  $('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
