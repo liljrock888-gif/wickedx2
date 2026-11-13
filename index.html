@@ -70,6 +70,9 @@
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
   .name{position:relative;display:inline-block;font-family:var(--f-display);font-weight:400;font-size:clamp(70px,15vw,180px);line-height:.95;margin:6px 0 10px;white-space:nowrap;
     color:var(--ink);-webkit-text-stroke:6px var(--white);paint-order:stroke fill;text-shadow:7px 7px 0 var(--tone)}
+  .namewrap{position:relative;display:inline-block;margin:6px 0 10px}
+  .namewrap .name{margin:0;z-index:1}
+  .burst{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0}
   .stripes{position:absolute;top:22%;display:flex;flex-direction:column;gap:9px;width:clamp(30px,5vw,60px)}
   .stripes span{display:block;height:clamp(6px,.9vw,10px);background:var(--white);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
   .stripes.left{right:calc(100% + 14px)}
@@ -251,9 +254,9 @@
     <div class="panel">
       <div class="speed" aria-hidden="true"></div>
       <div class="bubble l" id="bubL" aria-hidden="true">Something's<br>off...</div>
-      <div class="bubble r" id="bubR" aria-hidden="true">The stripes!<br>Only one side!</div>
+      <div class="bubble r" id="bubR" aria-hidden="true">It's not<br>balanced!</div>
       <div class="inner">
-        <h1 class="name" id="name"><span class="stripes left" aria-hidden="true"><span></span><span></span><span></span></span><span id="chName">Wickedx2</span><span class="stripes right" aria-hidden="true"><span></span><span></span><span></span></span></h1>
+        <div class="namewrap"><canvas class="burst" id="burst" aria-hidden="true"></canvas><h1 class="name" id="name"><span id="chName">Wickedx2</span></h1></div>
         <div><p class="tagline" id="tagline"></p></div>
         <div class="twin">
           <a class="btn solid from-l" id="subBtn" href="#" target="_blank" rel="noopener">Subscribe</a>
@@ -419,6 +422,32 @@
     const half = back + front;                     // ...then mirror it exactly for the left
     svg.innerHTML = `<g>${half}</g><g transform="translate(${cx*2} 0) scale(-1 1)">${half}</g>`;
   })();
+
+  // comic halftone burst: big dots hug the name, shrinking as they spread out
+  function drawBurst(){
+    const cv = document.getElementById('burst'), nm = document.getElementById('name'); if (!cv || !nm) return;
+    const w = Math.round(nm.offsetWidth * 1.45 + 80), h = Math.round(nm.offsetHeight * 2.3 + 40), dpr = devicePixelRatio || 1;
+    cv.width = w * dpr; cv.height = h * dpr; cv.style.width = w + 'px'; cv.style.height = h + 'px';
+    const g = cv.getContext('2d'); g.scale(dpr, dpr); g.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, rx = w / 2, ry = h / 2;
+    // soft white base so the dots sit on clean paper, not on the speed lines
+    const grad = g.createRadialGradient(cx, cy, 0, cx, cy, rx);
+    grad.addColorStop(0, 'rgba(255,255,255,1)'); grad.addColorStop(.62, 'rgba(255,255,255,.95)'); grad.addColorStop(1, 'rgba(255,255,255,0)');
+    g.save(); g.translate(cx, cy); g.scale(1, ry / rx); g.fillStyle = grad; g.beginPath(); g.arc(0, 0, rx, 0, Math.PI * 2); g.fill(); g.restore();
+    const step = Math.max(9, Math.round(nm.offsetHeight / 13)), maxR = step * .46;
+    g.fillStyle = '#0b0b0b';
+    for (let y = step / 2; y < h; y += step) {
+      const shift = (Math.round(y / step) % 2) * step / 2;          // offset rows like real screentone
+      for (let x = step / 2 + shift; x < w; x += step) {
+        const d = Math.hypot((x - cx) / rx, (y - cy) / ry);           // 0 at center, 1 at the edge
+        if (d > .98) continue;
+        const r = maxR * Math.pow(Math.max(0, 1 - d), .9) * (d < .3 ? d / .3 : 1);  // fade out under the letters too
+        if (r > .5) { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); }
+      }
+    }
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(drawBurst);
+  let bt; addEventListener('resize', () => { clearTimeout(bt); bt = setTimeout(drawBurst, 150); });
 
   // mirrored entrance
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('pre')));
