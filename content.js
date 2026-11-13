@@ -19,8 +19,8 @@ const CHANNEL = {
   name: "Wickedx2",
   handle: "@Wickedx2",                 // your YouTube @handle
   layout: "shorts",                    // "shorts" = tall vertical cards, "videos" = wide cards
-  tagline: "Roblox, Block Blast and gaming Shorts. Help me hit 10K subs!",
-  about: "I make the content I think you want, and maybe need. Roblox battlegrounds, anime games, Block Blast high scores and whatever drops next. Thank you all for 5K, you're amazing. Now help me reach 10K!",
+  tagline: "Roblox anime games, battlegrounds and gaming Shorts. Help me hit 10K subs!",
+  about: "I make the content I think you want, and maybe need. Roblox battlegrounds, anime games and whatever drops next. Thank you all for 5K, you're amazing. Now help me reach 10K!",
   // Optional: your channel ID (starts with UC...). When it's filled in, the
   // "Latest upload" player shows your newest video automatically.
   // Find it at youtube.com/account_advanced
@@ -40,9 +40,6 @@ const CHANNEL = {
 // Newest first. Paste YouTube links here.
 const VIDEOS = [
   { link: "https://youtube.com/shorts/Ux1gSUdyH7Y", title: "I OPENED 225 VILLAIN CHESTS AND... 🔥(Anime Expeditions)" },
-  { link: "https://youtube.com/shorts/p6NUBR1-RGs", title: "1000 iq move ⭐" },
-  { link: "https://youtube.com/shorts/qPOuboazFnE", title: "i said i’d stop after one game of block blast 😂" },
-  { link: "https://youtube.com/shorts/Kb_YytIoo2E", title: "Why My Block Blast Score Looks Like THIS 😳" },
   { link: "https://youtube.com/shorts/hai4WlGHbXE", title: "They Dropped a NEW Character…🔥⚡" },
   { link: "https://youtube.com/shorts/wm7yzVNZ2FQ", title: "PICCOLO WOKE ME UP JUST TO AURA FARM (DRAGON BALL FINAL STAND REMASTERED)" },
   { link: "https://youtube.com/shorts/ByQ4c_0fy0k", title: "THIS NEW MODE IN FISTBORN IS🔥" },
@@ -51,6 +48,9 @@ const VIDEOS = [
   { link: "https://youtube.com/shorts/BAH_VNYoIGE", title: "THIS MECH TRANSFORMATION IN COMBATANTS IS FIRE 🔥" },
   { link: "https://youtube.com/shorts/ehR01gjUX2Y", title: "⚡🔥 FIRE & LIGHTNING BREATHING IN THIS NEW DEMON SLAYER GAME" },
   { link: "https://youtube.com/shorts/a11VSJIXFDU", title: "Bored of Roblox Battlegrounds? Try Combatants 👀" },
+  { link: "https://youtube.com/shorts/bq998xq7fr8", title: "Can’t Find a Game? Hire a Fisher Instead! 🐟" },
+  { link: "https://youtube.com/shorts/JM3LtgsxX80", title: "🔥 This New Anime Soccer Game Looks INSANE! ⚽" },
+  { link: "https://youtube.com/shorts/cUp88q3xnSs", title: "🔥 You NEED to See This Anime Game Sneak!" },
 ];
 
 // Leave empty to show "Merch coming soon". Example product:
