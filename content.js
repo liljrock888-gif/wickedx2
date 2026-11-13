@@ -9,10 +9,6 @@
         (the title is optional; a plain "link", works too)
      3. Save. The newest video goes first.
 
-   HOW TO ADD MERCH
-     Copy one { ... } block in MERCH, change the name/price,
-     and paste the product link from your Fourthwall store into "link".
-     "look" picks the drawing: "tee", "hoodie", "beanie" or "stickers".
    ===================================================================== */
 
 const CHANNEL = {
@@ -51,10 +47,4 @@ const VIDEOS = [
   { link: "https://youtube.com/shorts/bq998xq7fr8", title: "Can’t Find a Game? Hire a Fisher Instead! 🐟" },
   { link: "https://youtube.com/shorts/JM3LtgsxX80", title: "🔥 This New Anime Soccer Game Looks INSANE! ⚽" },
   { link: "https://youtube.com/shorts/cUp88q3xnSs", title: "🔥 You NEED to See This Anime Game Sneak!" },
-];
-
-// Leave empty to show "Merch coming soon". Example product:
-//   { name: "Skull Hoodie", price: "$52", look: "hoodie", link: "https://...fourthwall.com/products/..." },
-// "look" picks the drawing: "tee", "hoodie", "beanie" or "stickers".
-const MERCH = [
 ];

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wickedx2</title>
-<meta name="description" content="Wickedx2: videos, merch and everything on the channel.">
+<meta name="description" content="Wickedx2: Roblox anime games, battlegrounds and gaming Shorts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Bangers&family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -124,7 +124,7 @@
   .vid img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
   .vid:hover img{transform:scale(1.05)}
   .vid .play{position:absolute;inset:0;display:grid;place-items:center}
-  .vid .play span{width:58px;height:58px;border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--white);box-shadow:3px 3px 0 var(--ink)}
+  .vid .play span:not(.skullbtn){width:58px;height:58px;border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--white);box-shadow:3px 3px 0 var(--ink)}
   .vid .play svg{width:20px;height:20px;fill:var(--ink);margin-left:3px}
   .vid .cap{padding:9px 14px 7px;font-family:var(--f-sfx);font-size:20px;letter-spacing:.12em;text-align:center}
   .vid.soon{cursor:default}
@@ -137,28 +137,20 @@
   .shorts .vid .thumb{aspect-ratio:9/16}
   .shorts .vid .cap{font-family:var(--f-body);font-weight:700;font-size:13.5px;letter-spacing:0;line-height:1.35;padding:10px 12px 12px;text-align:center;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(1.35em * 2 + 22px)}
+  /* small rectangular cards with a skull play button */
+  .shorts .vids{grid-template-columns:repeat(6,1fr);gap:16px}
+  .shorts .vid .thumb{aspect-ratio:3/4}
+  .shorts .vid{box-shadow:4px 4px 0 var(--ink);border-width:3px}
+  .shorts .vid:hover{box-shadow:7px 7px 0 var(--ink)}
+  .shorts .vid .thumb{border-bottom-width:3px}
+  .shorts .vid .cap{font-size:12px;padding:8px 8px 9px;min-height:0;display:block;overflow:visible}
+  .shorts .vid .cap span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:16px;height:32px}
+  .skullbtn{position:relative;display:grid;place-items:center;width:74px;height:74px;margin-top:-10px;transition:transform .2s cubic-bezier(.2,1.4,.4,1)}
+  .vid .play .skullbtn svg{width:74px;height:74px;margin:0;fill:initial;color:var(--ink);overflow:visible;filter:drop-shadow(3px 3px 0 var(--ink)) drop-shadow(0 0 6px rgba(255,255,255,.9));transition:color .2s}
+  .skullbtn i{position:absolute;bottom:-22px;font-style:normal;font-family:var(--f-sfx);font-size:14px;letter-spacing:.12em;background:var(--ink);color:var(--white);padding:2px 9px 0;border:2px solid var(--white);transform:rotate(-4deg)}
+  .vid:hover .skullbtn{transform:scale(1.14) rotate(-6deg)}
+  .vid:hover .play .skullbtn svg{color:#c9a24a}
   .shorts .player .box{width:auto;height:min(86vh,900px);aspect-ratio:9/16;max-width:100%}
-  .merch{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .item{display:flex;flex-direction:column;text-align:center;transition:transform .15s,box-shadow .15s}
-  .item:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
-  .item .art{aspect-ratio:1/1;display:grid;place-items:center;border-bottom:4px solid var(--ink)}
-  .item .art svg{width:80%;height:80%}
-  .item .art .cloth{fill:var(--white);stroke:var(--ink);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
-  .item .art .detail{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-  .item .art .stripe{fill:var(--ink)}
-  .item .info{padding:14px 14px 18px;display:grid;gap:4px;flex:1}
-  .item h3{font-family:var(--f-sfx);font-weight:400;font-size:22px;letter-spacing:.08em}
-  .item .price{font-family:var(--f-display);font-size:36px;line-height:1}
-  .item .btn{min-width:0;width:100%;margin-top:8px;padding:9px 10px 7px;font-size:19px}
-  .shopall{text-align:center;margin-top:34px}
-  .merch.none{display:block}
-  .soonpanel{position:relative;overflow:hidden;text-align:center;padding:64px 20px;max-width:880px;margin:0 auto}
-  .soonpanel .speed{background:repeating-conic-gradient(from 0deg at 50% 50%,var(--ink) 0deg .9deg,transparent .9deg 5deg);
-    -webkit-mask:radial-gradient(ellipse at 50% 50%,transparent 30%,#000 75%);mask:radial-gradient(ellipse at 50% 50%,transparent 30%,#000 75%)}
-  .soonpanel .inner{position:relative;display:grid;justify-items:center;gap:18px}
-  .soonpanel b{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,76px);line-height:1;color:var(--ink);-webkit-text-stroke:5px var(--white);paint-order:stroke fill;text-shadow:5px 5px 0 var(--tone)}
-
-
   .about{max-width:700px;margin:0 auto;text-align:center;font-size:18px;line-height:1.75;font-weight:500;padding:28px 30px}
   .socials{display:flex;justify-content:center;gap:12px 18px;flex-wrap:wrap;margin-top:30px}
   .socials a{font-family:var(--f-sfx);font-size:20px;letter-spacing:.1em;text-decoration:none;border:3px solid var(--ink);padding:5px 14px 3px;box-shadow:3px 3px 0 var(--ink);background:var(--white)}
@@ -189,8 +181,8 @@
   .toast.show{opacity:1;transform:translate(-50%,0) rotate(-3deg)}
 
   @media (max-width:900px){
-    .merch{grid-template-columns:repeat(2,1fr)}
-    .vids,.shorts .vids{grid-template-columns:repeat(2,1fr)}
+    .vids{grid-template-columns:repeat(2,1fr)}
+    .shorts .vids{grid-template-columns:repeat(3,1fr)}
     .bar nav{gap:18px}.bar nav.l{padding-right:18px}.bar nav.r{padding-left:18px}
     .bubble{display:none}
   }
@@ -203,8 +195,9 @@
     .hero .panel{padding:34px 14px 26px;box-shadow:5px 5px 0 var(--ink)}
     .hero .crest{width:110px;height:110px}
     .name{-webkit-text-stroke:4px var(--white);text-shadow:4px 4px 0 var(--tone)}
-    .merch,.vids{gap:14px}
-    .item h3{font-size:17px}.item .price{font-size:28px}
+    .vids{gap:14px}
+    .shorts .vids{grid-template-columns:repeat(2,1fr);gap:12px}
+    .skullbtn,.vid .play .skullbtn svg{width:60px;height:60px}
     .btn{min-width:0;width:100%}
     .twin{flex-direction:column;align-items:stretch;max-width:320px;margin-left:auto;margin-right:auto}
     .symmetry{font-size:16px}
@@ -241,12 +234,12 @@
 <main>
   <header class="top">
     <div class="wrap bar">
-      <nav class="l" aria-label="Primary left"><a href="#videos">Videos</a><a href="#merch">Merch</a></nav>
+      <nav class="l" aria-label="Primary left"><a href="#videos">Videos</a><a href="#about">About</a></nav>
       <a class="crest-link" href="#top" aria-label="Back to top">
         <svg class="flames" id="flames" viewBox="0 0 180 74" preserveAspectRatio="xMidYMax meet" aria-hidden="true"></svg>
         <svg class="skull half" aria-hidden="true"><use href="#skull"/></svg>
       </a>
-      <nav class="r" aria-label="Primary right"><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      <nav class="r" aria-label="Primary right"><a href="#contact">Contact</a><a id="navSub" href="#" target="_blank" rel="noopener">Subscribe</a></nav>
     </div>
   </header>
 
@@ -278,18 +271,6 @@
       </div>
       <div class="latest frame tone from-l"><div class="screen" id="latest"></div></div>
       <div class="vids" id="vids"></div>
-    </div>
-  </section>
-
-  <section id="merch">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Official merch</span>
-        <h2>The Armory</h2>
-        <p id="merchNote">Rep the channel. Every piece is made to order and shipped to your door.</p>
-      </div>
-      <div class="merch" id="merchGrid"></div>
-      <div class="shopall" id="shopAll" hidden><a class="btn" id="shopAllBtn" href="#" target="_blank" rel="noopener">Visit the full store</a></div>
     </div>
   </section>
 
@@ -326,7 +307,6 @@
 <script>
   const C = (typeof CHANNEL !== 'undefined') ? CHANNEL : {name:'Wickedx2',socials:{}};
   const V = (typeof VIDEOS !== 'undefined') ? VIDEOS : [];
-  const M = (typeof MERCH !== 'undefined') ? MERCH : [];
   const $ = id => document.getElementById(id);
   const skull = '<svg class="skull" aria-hidden="true"><use href="#skull"/></svg>';
   const ytId = u => { const m = String(u).match(/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([\w-]{11})/); return m ? m[1] : null; };
@@ -336,7 +316,7 @@
   $('chName').textContent = C.name; $('footName').textContent = C.name; document.title = C.name;
   $('tagline').textContent = C.tagline || '';
   $('aboutText').textContent = C.about || '';
-  $('subBtn').href = yt ? yt + '?sub_confirmation=1' : '#';
+  $('subBtn').href = $('navSub').href = yt ? yt + '?sub_confirmation=1' : '#';
   $('ytBtn').href = yt || '#';
   if (C.discord) $('dcBtn').href = C.discord; else $('dcBtn').hidden = true;
   if (C.email) { $('mail').hidden = false; $('mailAddr').textContent = C.email; }
@@ -362,8 +342,8 @@
   const R = ['I','II','III','IV','V','VI'];
   $('vids').innerHTML = ids.length
     ? vids.slice(C.channelId ? 0 : 1).map(({id, title}, i) => `<button class="vid frame ${i % 4 < 2 ? 'from-l' : 'from-r'}" type="button" data-id="${id}">
-        <div class="thumb"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><div class="play"><span><svg><use href="#playicon"/></svg></span></div></div>
-        <div class="cap">${title ? title.replace(/[<>&"]/g, '') : 'Watch'}</div></button>`).join('')
+        <div class="thumb"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><div class="play"><span class="skullbtn"><svg class="skull" aria-hidden="true"><use href="#skull"/></svg><i>Play</i></span></div></div>
+        <div class="cap"><span>${title ? title.replace(/[<>&"]/g, '') : 'Watch'}</span></div></button>`).join('')
     : R.map((n, i) => `<div class="vid frame tone soon ${i % 3 === 0 ? 'from-l' : i % 3 === 2 ? 'from-r' : ''}"><div class="thumb">${skull}<span class="numeral">${n}</span></div><div class="cap">Coming soon</div></div>`).join('');
   $('vids').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) openPlayer(b.dataset.id); });
   function openPlayer(id){
@@ -374,54 +354,6 @@
   $('closePlayer').onclick = closePlayer;
   $('player').addEventListener('click', e => { if (e.target.id === 'player') closePlayer(); });
   addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
-
-  // merch drawings
-  const LOOK = {
-    tee: `<path class="cloth" d="M64 42l20-11q16 14 32 0l20 11 34 25-15 28-18-10v86H63V85l-18 10-15-28z"/><path class="detail" d="M84 31q16 18 32 0"/><use href="#skull" x="83" y="78" width="34" height="34"/>`,
-    hoodie: `<path class="cloth" d="M60 56l24-14q16-26 32 0l24 14 32 28-14 70-16-4-2 22H60l-2-22-16 4-14-70z"/><path class="detail" d="M84 42q16 32 32 0M94 58l-2 26M106 58l2 26M72 138h56l5 26H67z"/><use href="#skull" x="85" y="94" width="30" height="30"/>`,
-    beanie: `<path class="cloth" d="M46 128q0-82 54-82t54 82z"/><circle class="cloth" cx="100" cy="40" r="13"/><rect class="cloth" x="40" y="122" width="120" height="38" rx="6"/><rect class="stripe" x="52" y="130" width="22" height="4"/><rect class="stripe" x="52" y="139" width="22" height="4"/><rect class="stripe" x="52" y="148" width="22" height="4"/><use href="#skull" x="88" y="80" width="24" height="24"/>`,
-    stickers: `<rect class="cloth" x="34" y="44" width="78" height="78" rx="16" transform="rotate(-9 73 83)"/><use href="#skull" x="50" y="58" width="46" height="46" transform="rotate(-9 73 83)"/><circle class="cloth" cx="128" cy="124" r="42"/><use href="#skull" x="106" y="102" width="44" height="44"/><rect class="cloth" x="108" y="34" width="56" height="34" rx="17" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="44" width="28" height="3" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="50" width="28" height="3" transform="rotate(8 136 51)"/><rect class="stripe" x="122" y="56" width="28" height="3" transform="rotate(8 136 51)"/>`
-  };
-  $('merchGrid').innerHTML = M.map((m, i) => {
-    const link = m.link || C.store || '';
-    return `<div class="item frame ${i < M.length / 2 ? 'from-l' : 'from-r'}">
-      <div class="art tone"><svg viewBox="0 0 200 200" aria-hidden="true">${LOOK[m.look] || LOOK.tee}</svg></div>
-      <div class="info"><h3>${m.name}</h3><div class="price">${m.price}</div>
-        <a class="btn solid ${link ? '' : 'off'}" href="${link || '#'}" target="_blank" rel="noopener">${link ? 'Buy' : 'Dropping soon'}</a></div></div>`;
-  }).join('');
-  if (C.store) { $('shopAll').hidden = false; $('shopAllBtn').href = C.store; }
-  if (!M.length) {
-    $('merchNote').textContent = 'Official merch is on the way. Subscribe so you catch the first drop.';
-    $('merchGrid').classList.add('none');
-    $('merchGrid').innerHTML = `<div class="soonpanel frame tone">
-      <div class="speed" aria-hidden="true"></div>
-      <div class="inner"><span class="label">The Armory</span><b>Merch coming soon</b>
-        <a class="btn solid" href="${yt ? yt + '?sub_confirmation=1' : '#'}" target="_blank" rel="noopener">Subscribe for the drop</a></div></div>`;
-  }
-
-  // black flames splitting the menu: curling tongues, mirrored pairs flicker in sync
-  (function(){
-    const svg = document.getElementById('flames'); if (!svg) return;
-    const H = 74, cx = 90;
-    // a flame tongue whose tip curls toward `dir` (-1 left, 1 right)
-    const tongue = (x, w, h, dir) => {
-      const k = dir * w;
-      return `M${x-w/2} ${H}C${x-w/2} ${H-h*.38} ${x-k*.42} ${H-h*.55} ${x-k*.08} ${H-h*.74}`+
-             `C${x+k*.12} ${H-h*.86} ${x-k*.02} ${H-h*.94} ${x+k*.22} ${H-h}`+
-             `C${x+k*.34} ${H-h*.78} ${x+w*.5} ${H-h*.5} ${x+w/2} ${H}Z`;
-    };
-    // [offset from center, width, height, duration, delay]
-    const pairs = [[66,18,26,1.3,.1],[52,24,44,1.05,.35],[38,22,30,1.4,0],[26,20,40,1.15,.2]];
-    let back = '', front = '';
-    pairs.forEach(([dx,w,h,d,del]) => {           // draw the right side only...
-      const x = cx + dx, st = `--d:${d}s;--del:-${del}s;--sk:4deg`;
-      back += `<path d="${tongue(x, w, h, 1)}" style="${st}"/>`;
-      if (h > 34) front += `<path class="core" d="${tongue(x + 1.5, w*.38, h*.5, -1)}" style="${st}"/>`;
-    });
-    back += `<path d="${tongue(cx + 9, 14, 20, 1)}" style="--d:.9s;--del:-.5s;--sk:3deg"/>`;
-    const half = back + front;                     // ...then mirror it exactly for the left
-    svg.innerHTML = `<g>${half}</g><g transform="translate(${cx*2} 0) scale(-1 1)">${half}</g>`;
-  })();
 
   // comic halftone burst: big dots hug the name, shrinking as they spread out
   function drawBurst(){
